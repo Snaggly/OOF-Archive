@@ -1,0 +1,16 @@
+﻿<Window x:Class="OOF_GUI.Progress"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OOF_GUI"
+        mc:Ignorable="d"
+        Height="192" Width="483" WindowStyle="ToolWindow" IsTabStop="True">
+    <Grid>
+        <Label x:Name="Label1" Content="" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,80"/>
+        <ProgressBar x:Name="ProgressBar1" Height="30" Margin="10,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center" Maximum="100" Width="434"/>
+        <Label x:Name="LabelPercent" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" FontWeight="Bold"></Label>
+        <Button x:Name="CancelButton" Content="Cancel" HorizontalAlignment="Center" Margin="0,0,0,25" VerticalAlignment="Bottom" Width="45" Height="20" Click="CancelButton_Click"/>
+
+    </Grid>
+</Window>

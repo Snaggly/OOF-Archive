@@ -1,0 +1,38 @@
+﻿<Window x:Class="OOF_GUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OOF_GUI"
+        mc:Ignorable="d"
+        Title="OOF Gui" Height="550" Width="706.977">
+    <Grid>
+        <Menu>
+            <MenuItem Header="File">
+                <MenuItem Header="Open" Click="Open_Click"/>
+                <MenuItem Header="Create New" Click="Create_Click" />
+                <Separator/>
+                <MenuItem x:Name="MenuExtract" Header="Extract All" Click="Extract_Click" IsEnabled="False"/>
+                <MenuItem Header="Close" Click="Close_Click"/>
+            </MenuItem>
+            <MenuItem Header="About" Click="MenuItem_Click"/>
+        </Menu>
+
+        <ListView x:Name="FileList" ItemsSource="{Binding FileData}" Margin="0,20,0,0" Drop="FileList_Drop" AllowDrop="True" SelectionChanged="FileList_Selected">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Index}" Header="Index"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding FileName}" Header="File Name"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding FileSize}" Header="Size"/>
+                </GridView>
+            </ListView.View>
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem x:Name="UnpackButton" Header="Unpack" Click="Unpack_Click" IsEnabled="False"></MenuItem>
+                </ContextMenu>
+            </ListView.ContextMenu>
+        </ListView>
+
+    </Grid>
+
+</Window>
