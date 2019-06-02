@@ -4,7 +4,7 @@ using System.IO.Compression;
 
 namespace OOF_Packer
 {
-    public class GZipProvider
+    class GZipProvider
     {
         public static Stream Decompressor(Stream inputStream)
         {

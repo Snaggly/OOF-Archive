@@ -3,7 +3,7 @@ using System.Text;
 using System.Security.Cryptography;
 using System.IO;
 
-namespace RijndaelCryptography
+namespace OOF_Packer
 {
     public enum HashType { MD5, SHA1, SHA256, SHA512 }
 
@@ -12,16 +12,16 @@ namespace RijndaelCryptography
         public event Action Written;
         public event Action<Exception> Error;
 
-        private int KeySize;
-        private HashType HashType;
-        private string Key;
-        private byte[] SaltKey;
-        private byte[] VIKey;
+        private readonly int KeySize;
+        private readonly HashType hashType;
+        private readonly string Key;
+        private readonly byte[] SaltKey;
+        private readonly byte[] VIKey;
         
         public CryptoClass(int KeySize, HashType HashType, byte[] SaltKey, byte[] VIKey, string InputFile, int EntryPoint)
         {
             this.KeySize = KeySize;
-            this.HashType = HashType;
+            this.hashType = HashType;
             this.SaltKey = SaltKey;
             this.VIKey = VIKey;
             Key = HashFile(InputFile, HashType, EntryPoint);
@@ -32,10 +32,10 @@ namespace RijndaelCryptography
         public CryptoClass(int KeySize, HashType HashType, byte[] SaltKey, byte[] VIKey, string Password)
         {
             this.KeySize = KeySize;
-            this.HashType = HashType;
+            this.hashType = HashType;
             this.SaltKey = SaltKey;
             this.VIKey = VIKey;
-            Key = HashKey(Password, HashType);
+            Key = HashKey(Password);
             keyBytes = new Rfc2898DeriveBytes(Key, SaltKey).GetBytes(KeySize / 8);
             RMCrypto = new RijndaelManaged() { KeySize = KeySize, Mode = CipherMode.CBC, Padding = PaddingMode.PKCS7 };
         }
@@ -43,7 +43,7 @@ namespace RijndaelCryptography
         public CryptoClass(string InputFile)
         {
             KeySize = 256;
-            HashType = HashType.SHA256;
+            hashType = HashType.SHA256;
             SaltKey = new byte[8];
             VIKey = new byte[16];
             keyBytes = new byte[32];
@@ -59,14 +59,14 @@ namespace RijndaelCryptography
         private FileStream FSOut;
         private CryptoStream CStream;
         private StringBuilder StringBuilder;
-        private byte[] keyBytes;
-        private RijndaelManaged RMCrypto;
+        private readonly byte[] keyBytes;
+        private readonly RijndaelManaged RMCrypto;
 
-        public string HashKey(string Password, HashType HashType)
+        public string HashKey(string Password)
         {
             StringBuilder Sb = new StringBuilder();
             byte[] result = new byte[0];
-            switch ((int)HashType)
+            switch ((int)hashType)
             {
                 case 0:
                     result = MD5.Create().ComputeHash(Encoding.ASCII.GetBytes(Password));

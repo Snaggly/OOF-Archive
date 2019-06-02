@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Text;
 using System.IO;
-using RijndaelCryptography;
 
 namespace OOF_Packer
 {

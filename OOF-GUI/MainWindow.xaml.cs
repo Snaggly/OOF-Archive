@@ -22,7 +22,7 @@ namespace OOF_GUI
             InitializeComponent();
         }
 
-        private List<FileData> FileDatas = new List<FileData>();
+        private readonly List<FileData> FileDatas = new List<FileData>();
         private string loadedOOF;
         private FileUnpacker unpacker;
         private Progress progressBar;
@@ -116,11 +116,6 @@ namespace OOF_GUI
             {
                 progressBar?.Close();
             }
-        }
-
-        private void SelectKeyfile()
-        {
-            MessageBox.Show("This Pack seems to be Encrypted! ", "OOF GUI", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         private void Unpacker_OnProgressPercentEvent(double obj)
@@ -222,7 +217,7 @@ namespace OOF_GUI
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("OOF-Packer v0.2b (05/2019) ©Snagglebee");
+            MessageBox.Show("OOF-Packer v0.2c (06/2019) ©Snagglebee");
         }
     }
 }

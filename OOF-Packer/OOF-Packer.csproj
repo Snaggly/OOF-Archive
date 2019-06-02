@@ -43,18 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BytesGenerator.cs" />
-    <Compile Include="CompressInfo.cs" />
-    <Compile Include="CryptoClass.cs" />
-    <Compile Include="DecompressionStream.cs" />
+    <Compile Include="Utilities\BytesGenerator.cs" />
+    <Compile Include="Helpers\CompressInfo.cs" />
+    <Compile Include="Helpers\CryptoClass.cs" />
+    <Compile Include="Streams\DecompressionStream.cs" />
     <Compile Include="Exceptions\EncryptedException.cs" />
-    <Compile Include="EventRaiser.cs" />
+    <Compile Include="Utilities\EventRaiser.cs" />
     <Compile Include="FileBuilder.cs" />
-    <Compile Include="FileData.cs" />
-    <Compile Include="DataStreamResolver.cs" />
+    <Compile Include="Helpers\FileData.cs" />
+    <Compile Include="Streams\DataStreamResolver.cs" />
     <Compile Include="FileUnpacker.cs" />
-    <Compile Include="GZipProvider.cs" />
-    <Compile Include="Header.cs" />
+    <Compile Include="Helpers\GZipProvider.cs" />
+    <Compile Include="Utilities\Header.cs" />
     <Compile Include="Exceptions\InvalidHeaderException.cs" />
     <Compile Include="Exceptions\IncorrectKeyException.cs" />
     <Compile Include="Exceptions\NotAnOOFPackException.cs" />

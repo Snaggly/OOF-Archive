@@ -37,7 +37,7 @@ namespace OOF_GUI
             style.Setters.Add(new EventSetter(DropEvent, new DragEventHandler(ListViewItem_Drop)));
         }
 
-        private List<string> FilesToAdd;
+        private readonly List<string> FilesToAdd;
 
         private void ListViewItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -151,7 +151,7 @@ namespace OOF_GUI
 
         private void Packer_OnProgressFileNameEvent(string obj)
         {
-            progressWindow.Dispatcher.Invoke(() => progressWindow.ProgressLabel = obj);
+            progressWindow.Dispatcher.Invoke(() => progressWindow.ProgressLabel = Path.GetFileName(obj));
         }
 
         private void Encryption_Click(object sender, RoutedEventArgs e)
@@ -206,7 +206,7 @@ namespace OOF_GUI
 
         private Point _dragStartPoint;
 
-        private IList<FileData> _items = new ObservableCollection<FileData>();
+        private readonly IList<FileData> _items = new ObservableCollection<FileData>();
 
         private T FindVisualParent<T>(DependencyObject child)
             where T : DependencyObject
@@ -267,7 +267,7 @@ namespace OOF_GUI
             if (e.LeftButton == MouseButtonState.Pressed &&
                 (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance || Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
             {
-                var lb = sender as ListView;
+                // lb = sender as ListView;
                 var lbi = FindVisualParent<ListViewItem>(((DependencyObject)e.OriginalSource));
                 if (lbi != null)
                 {
