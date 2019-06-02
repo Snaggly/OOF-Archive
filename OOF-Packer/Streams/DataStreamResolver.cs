@@ -6,9 +6,9 @@ namespace OOF_Packer
     {
         public DataStreamResolver(Stream stream)
         {
-            this.inStream = stream;
+            inStream = stream;
         }
-        private Stream inStream;
+        private readonly Stream inStream;
 
         public override int Read(byte[] array, int offset, int count)
         {

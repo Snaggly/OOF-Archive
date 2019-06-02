@@ -66,7 +66,7 @@ namespace OOF_Packer
         {
             if (EventRaiser.OnFileNameChange == null && EventRaiser.OnProgressChange == null)
             {
-                UnpackNoEvent(outputPath, fileDatas, totalLength);
+                UnpackNoEvent(outputPath, fileDatas);
                 return;
             }
             inputStream = new FileStream(filePath, FileMode.Open, FileAccess.Read)
@@ -119,7 +119,7 @@ namespace OOF_Packer
             inputStream.Dispose();
         }
 
-        public void UnpackNoEvent(string outputPath, List<FileData> fileDatas, long totalLength)
+        public void UnpackNoEvent(string outputPath, List<FileData> fileDatas)
         {
             inputStream = new FileStream(filePath, FileMode.Open, FileAccess.Read)
             {

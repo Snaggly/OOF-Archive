@@ -56,7 +56,7 @@ namespace OOF_Packer
             for (int i = sizeof(int); i < TailOffset - Header.HeadEnd.Length; i++)
             {
                 long length = BitConverter.ToInt64(HeadBytes, i);
-                i = i + sizeof(long);
+                i += sizeof(long);
                 string fileName = "";
                 while (HeadBytes[i] != Header.Seperator)
                 {
@@ -108,13 +108,6 @@ namespace OOF_Packer
             TailOffset += Header.HeadEnd.Length;
 
             return headBytes;
-        }
-
-        private bool FindHeadEnd(byte[] toTest, byte[] vs)
-        {
-            string toTestString = BitConverter.ToString(toTest);
-            string vsString = BitConverter.ToString(vs);
-            return toTestString.Contains(vsString);
         }
 
         int Search(byte[] src, byte[] pattern)
