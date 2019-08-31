@@ -113,6 +113,7 @@ namespace OOF_Packer
                 headerBytes.AddRange(Header.HeadEnd);
                 headerBytes.AddRange(tailBytes);
                 byte[] compressedHead = GZipProvider.Compress(headerBytes.ToArray());
+                WriteToOutputStream(outputStream, BitConverter.GetBytes(compressedHead.Length), 0);
                 WriteToOutputStream(outputStream, compressedHead, 0);
                 tempFile.Position = 0 ;
                 tempFile.CopyTo(outputStream);
@@ -193,6 +194,7 @@ namespace OOF_Packer
                 headerBytes.AddRange(Header.HeadEnd);
                 headerBytes.AddRange(tailBytes);
                 byte[] compressedHead = GZipProvider.Compress(headerBytes.ToArray());
+                WriteToOutputStream(outputStream, BitConverter.GetBytes(compressedHead.Length), 0);
                 WriteToOutputStream(outputStream, compressedHead, 0);
                 tempFile.Position = 0;
                 tempFile.CopyTo(outputStream);

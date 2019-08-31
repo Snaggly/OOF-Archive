@@ -37,7 +37,7 @@ namespace OOF_Packer
             BufferSize = ResolveBufferSize(HeadBytes);
             Files = ResolveFiles(HeadBytes);
 
-            DataPos = offset + Header.HeadBegin.Length + Header.HeadEnd.Length - 1;
+            DataPos = Header.HeadBegin.Length + sizeof(int) + offset;
 
             PacketAmount = Diff.Count;
 
@@ -89,24 +89,12 @@ namespace OOF_Packer
 
         private byte[] ResolveHead(Stream stream, out int offset)
         {
-            byte[] headBytes = new byte[0];
-            offset = 0;
-
-            while (headBytes.Length < 1 || (TailOffset = Search(headBytes, Header.HeadEnd)) < 0)
-            {
-                if (ct.IsCancellationRequested)
-                    Thread.CurrentThread.Abort();
-
-                headBytes = new byte[Header.HeadEnd.Length + offset];
-                stream.Position = Header.HeadBegin.Length;
-                stream.Read(headBytes, 0, headBytes.Length);
-                try { headBytes = GZipProvider.Decompress(headBytes); }
-                catch (InvalidDataException) { headBytes = new byte[0]; }
-                offset++;
-            }
-
-            TailOffset += Header.HeadEnd.Length;
-
+            byte[] buffer = new byte[4];
+            stream.Read(buffer, 0, buffer.Length);
+            offset = BitConverter.ToInt32(buffer, 0);
+            byte[] headBytes = new byte[offset];
+            stream.Read(headBytes, 0, headBytes.Length);
+            headBytes = GZipProvider.Decompress(headBytes);
             return headBytes;
         }
 
@@ -127,6 +115,8 @@ namespace OOF_Packer
 
         private List<int> ResolveDiff(byte[] HeadBytes)
         {
+            TailOffset = Search(HeadBytes, Header.HeadEnd);
+            TailOffset += Header.HeadEnd.Length;
             List<int> Diff = new List<int>();
             for (int i = TailOffset; i < HeadBytes.Length; i += sizeof(int))
                 Diff.Add(BitConverter.ToInt32(HeadBytes, i));
