@@ -8,13 +8,10 @@ namespace OOF_Packer
 {
     public class CompressionInfo
     {
-        CancellationToken ct;
         public bool IsEncrypted { get; } = false;
 
-        public CompressionInfo(Stream file, CryptoClass crypto, CancellationToken ct)
+        public CompressionInfo(Stream file, CryptoClass crypto)
         {
-            this.ct = ct;
-
             byte[] headBytes = new byte[Header.HeadBegin.Length];
             file.Position = 0;
             file.Read(headBytes, 0, headBytes.Length);

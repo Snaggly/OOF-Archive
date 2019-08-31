@@ -55,6 +55,20 @@ namespace OOF_Packer
             RMCrypto = new RijndaelManaged() { KeySize = KeySize, Mode = CipherMode.CBC, Padding = PaddingMode.PKCS7 };
         }
 
+        public CryptoClass(byte[] Keybytes)
+        {
+            KeySize = 256;
+            hashType = HashType.SHA256;
+            SaltKey = new byte[8];
+            VIKey = new byte[16];
+            keyBytes = new byte[32];
+
+            Array.Copy(Keybytes, 0, SaltKey, 0, 8);
+            Array.Copy(Keybytes, 8, VIKey, 0, 16);
+            Array.Copy(Keybytes, 24, keyBytes, 0, 32);
+            RMCrypto = new RijndaelManaged() { KeySize = KeySize, Mode = CipherMode.CBC, Padding = PaddingMode.PKCS7 };
+        }
+
         private FileStream FSIn;
         private FileStream FSOut;
         private CryptoStream CStream;

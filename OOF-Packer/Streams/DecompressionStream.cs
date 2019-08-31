@@ -8,12 +8,12 @@ namespace OOF_Packer
     {
         public DecompressionStream(Stream toDecompressStream) : this(toDecompressStream, null, null)
         {
-            ci = new CompressionInfo(toDecompressStream, null, CancellationToken.None);
+            ci = new CompressionInfo(toDecompressStream, null);
         }
 
         public DecompressionStream(Stream toDecompressStream, CryptoClass crypto) : this(toDecompressStream, null, crypto)
         {
-            ci = new CompressionInfo(toDecompressStream, null, CancellationToken.None);
+            ci = new CompressionInfo(toDecompressStream, null);
         }
 
         public DecompressionStream(Stream toDecompressStream, CompressionInfo compressionInfo) : this(toDecompressStream, compressionInfo, null) { }

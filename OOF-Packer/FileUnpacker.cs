@@ -19,7 +19,7 @@ namespace OOF_Packer
             filePath = filePathtoUnpack;
             this.crypto = crypto;
             inputStream = new FileStream(filePathtoUnpack, FileMode.Open, FileAccess.Read);
-            compressInfo = new CompressionInfo(inputStream, crypto, ct);
+            compressInfo = new CompressionInfo(inputStream, crypto);
             try
             {
                 decompStream = new DecompressionStream(inputStream, compressInfo, crypto);
